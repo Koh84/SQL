@@ -1,5 +1,6 @@
 package com.example.kelvin.sqldatabase;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -28,6 +29,18 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS contacts");
         onCreate(db);
+    }
+
+    public boolean insertContact (String name, String phone, String email, String street,String place) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("name", name);
+        contentValues.put("phone", phone);
+        contentValues.put("email", email);
+        contentValues.put("street", street);
+        contentValues.put("place", place);
+        db.insert("contacts", null, contentValues);
+        return true;
     }
 
     public ArrayList<String> getAllContacts() {

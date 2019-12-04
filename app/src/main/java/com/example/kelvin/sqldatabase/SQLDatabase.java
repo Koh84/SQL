@@ -25,7 +25,7 @@ public class SQLDatabase extends Activity {
         ArrayList array_list = mydb.getAllContacts();
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
         obj = (ListView)findViewById(R.id.listView1);
-
+        obj.setAdapter(arrayAdapter);
     }
 
     @Override
