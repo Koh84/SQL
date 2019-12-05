@@ -26,6 +26,20 @@ public class SQLDatabase extends Activity {
         ArrayAdapter arrayAdapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, array_list);
         obj = (ListView)findViewById(R.id.listView1);
         obj.setAdapter(arrayAdapter);
+        obj.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                int id_To_Search = position + 1;
+
+                Bundle dataBundle = new Bundle();
+                dataBundle.putInt("id", id_To_Search);
+
+                Intent intent = new Intent(getApplicationContext(),DisplayContact.class);
+
+                intent.putExtras(dataBundle);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
