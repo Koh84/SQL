@@ -124,6 +124,30 @@ public class DisplayContact extends Activity {
                 place.setClickable(true);
 
                 return true;
+            case R.id.Delete_Contact:
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setMessage(R.string.deleteContact)
+                        .setPositiveButton(R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                mydb.deleteContact(id_To_Update);
+                                Toast.makeText(getApplicationContext(), "Deleted Successfully",
+                                        Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(),SQLDatabase.class);
+                                startActivity(intent);
+                            }
+                        })
+                        .setNegativeButton(R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                // User cancelled the dialog
+                            }
+                        });
+
+                AlertDialog d = builder.create();
+                d.setTitle("Are you sure");
+                d.show();
+
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
 
